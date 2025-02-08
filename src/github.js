@@ -75,7 +75,6 @@ async function getAllStar(token) {
 }
 
 async function _getStarByPage(token, max, page) {
-	console.log(max, page)
 	const url = `https://api.github.com/user/starred?per_page=${max}&page=${page}`;
 	const header = _getHeader(token);
 	const resp = await fetch(url, {
