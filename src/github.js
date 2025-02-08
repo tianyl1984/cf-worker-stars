@@ -46,15 +46,11 @@ async function getGist(token, gistId) {
 		method: 'GET',
 		headers: header,
 	});
-	const text = await resp.text();
-	console.log(text);
-	return JSON.parse(text);
+	return resp.json();
 }
 
 async function getGistContent(token, gistId) {
-	console.log(gistId);
 	const gist = await getGist(token, gistId);
-	console.log(gist);
 	return gist.files[GIST_FILE_NAME].content;
 }
 
