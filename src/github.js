@@ -47,14 +47,14 @@ async function getGist(token, gistId) {
 		headers: header,
 	});
 	const text = await resp.text();
-	console(text);
+	console.log(text);
 	return JSON.parse(text);
 }
 
 async function getGistContent(token, gistId) {
 	console.log(gistId);
 	const gist = await getGist(token, gistId);
-	console.log(gist)
+	console.log(gist);
 	return gist.files[GIST_FILE_NAME].content;
 }
 
