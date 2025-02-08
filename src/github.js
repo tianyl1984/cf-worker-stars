@@ -30,7 +30,7 @@ async function updateGist(token, gistId, data) {
 			description: 'star data *DO NOT DELETE* ',
 			public: false,
 			files: {
-				GIST_FILE_NAME: {
+				[GIST_FILE_NAME]: {
 					content: data
 				}
 			}
