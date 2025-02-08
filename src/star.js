@@ -9,11 +9,14 @@ async function handle(req, env, ctx) {
 	}
 	// 获取所有tag关系
 	if (url.pathname === '/api/getTagRepo') {
-		return null;
+		const content = await github.getGistContent(env.GITHUB_TOKEN, env.GIST_ID);
+		return _resp(content, true);
 	}
 	// 更新tag关系
 	if (url.pathname === '/api/saveTagRepo') {
-		return null;
+		const body = await req.text();
+		await github.updateGist(env.GITHUB_TOKEN, env.GIST_ID, body);
+		return _resp({});
 	}
 	return _error404Resp();
 }
@@ -22,8 +25,9 @@ function _error404Resp() {
 	return _resp({ error: 404 });
 }
 
-function _resp(data) {
-	return new Response(JSON.stringify(data), {
+function _resp(data, flag) {
+	const body = flag ? data : JSON.stringify(data);
+	return new Response(body, {
 		headers: { 'Content-Type': 'application/json' },
 	});
 }

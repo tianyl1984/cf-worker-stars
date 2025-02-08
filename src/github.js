@@ -1,4 +1,6 @@
 
+const GIST_FILE_NAME = 'star.json';
+
 async function createGist(token) {
 	const url = 'https://api.github.com/gists';
 	const header = _getHeader(token);
@@ -9,7 +11,7 @@ async function createGist(token) {
 			description: '描述',
 			public: false,
 			files: {
-				'star.json': {
+				GIST_FILE_NAME: {
 					content: '内容'
 				}
 			}
@@ -28,8 +30,8 @@ async function updateGist(token, gistId, data) {
 			description: 'star data *DO NOT DELETE* ',
 			public: false,
 			files: {
-				'star.json': {
-					content: JSON.stringify(data)
+				GIST_FILE_NAME: {
+					content: data
 				}
 			}
 		})
@@ -45,6 +47,11 @@ async function getGist(token, gistId) {
 		headers: header,
 	});
 	return resp.json();
+}
+
+async function getGistContent(token, gistId) {
+	const gist = await getGist(token, gistId);
+	return gist.files[GIST_FILE_NAME].content;
 }
 
 async function getAllStar(token) {
@@ -87,5 +94,6 @@ export default {
 	createGist,
 	updateGist,
 	getGist,
+	getGistContent,
 	getAllStar,
 }

@@ -25,6 +25,7 @@ compatibility_date = "2025-01-09"
 # MY_VARIABLE = "production_value"
 [env.dev.vars]
 GITHUB_TOKEN="ghp_xxxx"
+GIST_ID="xxx"
 
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
