@@ -1,4 +1,5 @@
 import auth from './auth.js';
+import star from './star.js';
 
 export default {
 	async fetch(request, env, ctx) {
@@ -18,5 +19,9 @@ async function _handle(req, env, ctx) {
 	// }
 	// console.log('login success');
 	// const user = authResult.user;
+	const url = new URL(req.url);
+	if (url.pathname.startsWith('/api/')) {
+		return star.handle(req, env, ctx);
+	}
 	return new Response(`Hello:${req.url}`);
 }
