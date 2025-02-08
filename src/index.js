@@ -18,5 +18,5 @@ async function _handle(req, env, ctx) {
 	// }
 	// console.log('login success');
 	// const user = authResult.user;
-	return new Response(`Hello`);
+	return new Response(`Hello:${req.url}`);
 }

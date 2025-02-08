@@ -114,3 +114,9 @@ id = "330bca4f689b415daa51c321882d97c7"
 # [[vectorize]]
 # binding = "MY_INDEX"
 # index_name = "my-index"
+
+routes = [
+  { pattern = "stars.tianyl.eu.org/api/*", zone_name = "tianyl.eu.org" },
+  { pattern = "stars.tianyl.eu.org/login", zone_name = "tianyl.eu.org" },
+  { pattern = "stars.tianyl.eu.org/logout", zone_name = "tianyl.eu.org" }
+]
