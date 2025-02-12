@@ -97,7 +97,7 @@ function _getHeader(token) {
 	}
 }
 
-async function getReadmeHtml(repoName) {
+async function getReadmeHtml(token, repoName) {
 	const url = `https://api.github.com/repos/${repoName}/readme`;
 	const header = _getHeader(token);
 	header['Accept'] = 'application/vnd.github.v3.html';
