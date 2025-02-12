@@ -120,7 +120,7 @@ pattern = "stars.tianyl.eu.org/api/*"
 zone_name = "tianyl.eu.org"
 
 [[routes]]
-pattern = "stars.tianyl.eu.org/login"
+pattern = "stars.tianyl.eu.org/login*"
 zone_name = "tianyl.eu.org"
 
 [[routes]]
