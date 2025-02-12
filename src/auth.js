@@ -28,7 +28,7 @@ async function auth(req, env, ctx) {
 		result.resp = await jump2AuthResp(req, env);
 		return result;
 	}
-	result.user = user;
+	result.user = JSON.parse(user);
 	return result;
 }
 
@@ -97,12 +97,18 @@ async function jump2AuthResp(req, env) {
 	const callback = `https://${host}/login`;
 	const server = await env.authdata.get('auth_server');
 	const target = `https://${server}/login?callback=${encodeURIComponent(callback)}`;
-	return new Response(null, {
-		status: 302,
-		headers: {
-			"Location": target,
-		},
+	return new Response(JSON.stringify({
+		error: '302',
+		location: target
+	}), {
+		headers: { 'Content-Type': 'application/json' },
 	});
+	// return new Response(null, {
+	// 	status: 302,
+	// 	headers: {
+	// 		"Location": target,
+	// 	},
+	// });
 }
 
 function parseUidCookie(request) {

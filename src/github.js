@@ -58,9 +58,17 @@ async function getAllStar(token) {
 	const max = 100;
 	const result = [];
 	let page = 1;
-	while(true) {
+	while (true) {
 		const temp = await _getStarByPage(token, max, page);
-		const repos = temp.map(item => item.full_name);
+		const repos = temp.map(item => {
+			return {
+				name: item.full_name,
+				description: item.description,
+				startCnt: item.stargazers_count,
+				language: item.language,
+				topics: item.topics
+			}
+		});
 		result.push(...repos);
 		if (temp.length < max) {
 			break;
@@ -89,10 +97,22 @@ function _getHeader(token) {
 	}
 }
 
+async function getReadmeHtml(repoName) {
+	const url = `https://api.github.com/repos/${repoName}/readme`;
+	const header = _getHeader(token);
+	header['Accept'] = 'application/vnd.github.v3.html';
+	const resp = await fetch(url, {
+		method: 'GET',
+		headers: header,
+	});
+	return resp.text();
+}
+
 export default {
 	createGist,
 	updateGist,
 	getGist,
 	getGistContent,
 	getAllStar,
+	getReadmeHtml,
 }

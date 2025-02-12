@@ -18,6 +18,11 @@ async function handle(req, env, ctx) {
 		await github.updateGist(env.GITHUB_TOKEN, env.GIST_ID, body);
 		return _resp({});
 	}
+	if (url.pathname === '/api/readme') {
+		const repoName = url.searchParams.get('repoName');
+		const html = await github.getReadmeHtml(env.GITHUB_TOKEN, repoName);
+		return _resp({ html });
+	}
 	return _error404Resp();
 }
 

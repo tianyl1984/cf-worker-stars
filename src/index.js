@@ -13,13 +13,22 @@ export default {
 };
 
 async function _handle(req, env, ctx) {
-	// const authResult = await auth.auth(req, env, ctx);
-	// if (authResult.resp != null) {
-	// 	return authResult.resp;
-	// }
+	const authResult = await auth.auth(req, env, ctx);
+	if (authResult.resp != null) {
+		return authResult.resp;
+	}
 	// console.log('login success');
-	// const user = authResult.user;
+	const user = authResult.user;
 	const url = new URL(req.url);
+	if (url.pathname.startsWith('/api/user')) {
+		return new Response(JSON.stringify({
+			name: user.name,
+			avatar: user.avatar_url,
+			bio: user.bio
+		}), {
+			headers: { 'Content-Type': 'application/json' },
+		});
+	}
 	if (url.pathname.startsWith('/api/')) {
 		return star.handle(req, env, ctx);
 	}
